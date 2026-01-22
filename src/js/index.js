@@ -371,6 +371,26 @@ async function convertImage() {
     }
 }
 
+async function removeBackground() {
+    const fileInput = document.getElementById('aiBgImage');
+    if (!fileInput.files[0]) return alert('Select an image');
+
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+
+    try {
+        const response = await fetch(`${getBaseUrl()}/api/v1/ai/remove-bg`, {
+            method: 'POST',
+            headers: getHeaders(),
+            body: formData
+        });
+        const data = await response.json();
+        displayResponse(data, response.status);
+    } catch (error) {
+        displayResponse({ success: false, error: error.message }, 500);
+    }
+}
+
 function toggleWatermarkInputs() {
     const type = document.getElementById('watermarkType').value;
     const textInput = document.getElementById('wmTextInput');
