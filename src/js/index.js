@@ -23,7 +23,18 @@ function setProductionConfig() {
 }
 
 function setRapidApiConfig() {
-    const host = prompt('Enter RapidAPI Host (e.g., imageflow-api.p.rapidapi.com):');
+    let host, key;
+
+    // Use local env if available
+    if (typeof LOCAL_ENV !== 'undefined') {
+        host = LOCAL_ENV.RAPIDAPI_HOST;
+        key = LOCAL_ENV.RAPIDAPI_KEY;
+    }
+
+    // Fallback to prompts if not found
+    if (!host) {
+        host = prompt('Enter RapidAPI Host (e.g., imageflow-api.p.rapidapi.com):');
+    }
     if (!host) return;
 
     document.getElementById('apiUrl').value = `https://${host}`;
@@ -31,7 +42,10 @@ function setRapidApiConfig() {
     // Update Label for visibility
     document.getElementById('secretLabel').textContent = 'RapidAPI Key';
 
-    const key = prompt('Enter your RapidAPI Key:', '');
+    if (!key) {
+        key = prompt('Enter your RapidAPI Key:', '');
+    }
+
     if (key) {
         document.getElementById('proxySecret').value = key;
         document.getElementById('apiUser').value = 'test-user-123';
