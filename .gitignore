@@ -1,0 +1,19 @@
+# Environment variables
+.env
+
+# Dependencies
+node_modules/
+
+# Test images (optional - users can add their own)
+test-images/*.jpg
+test-images/*.jpeg
+test-images/*.png
+test-images/*.webp
+
+# Output files
+output/*
+!output/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db

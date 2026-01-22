@@ -1,0 +1,21 @@
+{
+  "name": "api-test-client",
+  "version": "1.0.0",
+  "description": "Test client for RapidAPI endpoints",
+  "main": "src/js/test-client.js",
+  "scripts": {
+    "test": "node src/js/test-client.js",
+    "test:health": "node src/js/test-client.js health",
+    "test:qrcode": "node src/js/test-client.js qrcode-generate",
+    "test:image": "node src/js/test-client.js image-resize",
+    "web": "open index.html"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "form-data": "^4.0.0"
+  },
+  "keywords": ["test", "rapidapi", "client"],
+  "author": "",
+  "license": "ISC"
+}
