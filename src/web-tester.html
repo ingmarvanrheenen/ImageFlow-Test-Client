@@ -227,6 +227,22 @@
                         <button class="btn btn-primary mt-10" onclick="applyWatermark()">Apply Watermark</button>
                     </article>
 
+                    <article class="endpoint-card">
+                        <div class="card-header">
+                            <span class="badge post">POST</span>
+                            <h3>Remove Background</h3>
+                        </div>
+                        <div class="file-area">
+                            <input type="file" id="aiBgImage" accept="image/*"
+                                onchange="updateFileName('aiBgImage', 'aiBgName')">
+                            <label for="aiBgImage" class="file-label">Choose Image</label>
+                            <span id="aiBgName" class="file-name"></span>
+                        </div>
+                        <button class="btn btn-primary mt-10" onclick="removeBackground()">Remove Background</button>
+                        <p class="hint" style="font-size: 0.8rem; opacity: 0.7; margin-top: 5px;">Note: Mock Mode Active
+                        </p>
+                    </article>
+
                 </div>
             </section>
         </main>
