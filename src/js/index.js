@@ -13,7 +13,15 @@ function setProductionConfig() {
     document.getElementById('apiUrl').value = 'https://imageflow-api.onrender.com';
     document.getElementById('secretLabel').textContent = 'Proxy Secret';
 
-    const secret = prompt('Enter your RapidAPI Proxy Secret:\n\nGet it from:\n1. Render Dashboard → Your Service → Environment\n2. Or RapidAPI Dashboard → Your API → Settings', '');
+    let secret;
+    if (typeof LOCAL_ENV !== 'undefined' && LOCAL_ENV.PROXY_SECRET) {
+        secret = LOCAL_ENV.PROXY_SECRET;
+    }
+
+    if (!secret) {
+        secret = prompt('Enter your RapidAPI Proxy Secret:\n\nGet it from:\n1. Render Dashboard → Your Service → Environment\n2. Or RapidAPI Dashboard → Your API → Settings', '');
+    }
+
     if (secret) {
         document.getElementById('proxySecret').value = secret;
         document.getElementById('apiUser').value = 'test-user-123';
