@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,10 @@
     <link rel="stylesheet" href="style/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
     <header class="main-header">
@@ -49,7 +52,7 @@
             <section class="section-block">
                 <h2 class="section-title">Endpoints</h2>
                 <div class="endpoint-list">
-                    
+
                     <article class="endpoint-card">
                         <div class="card-header">
                             <span class="badge get">GET</span>
@@ -80,7 +83,8 @@
                             <h3>Read QR Code</h3>
                         </div>
                         <div class="file-area">
-                            <input type="file" id="qrImage" accept="image/*" onchange="updateFileName('qrImage', 'qrFileName')">
+                            <input type="file" id="qrImage" accept="image/*"
+                                onchange="updateFileName('qrImage', 'qrFileName')">
                             <label for="qrImage" class="file-label">Choose QR Image</label>
                             <span id="qrFileName" class="file-name"></span>
                         </div>
@@ -93,7 +97,8 @@
                             <h3>Optimize Image</h3>
                         </div>
                         <div class="file-area">
-                            <input type="file" id="optimizeImage" accept="image/*" onchange="updateFileName('optimizeImage', 'optName')">
+                            <input type="file" id="optimizeImage" accept="image/*"
+                                onchange="updateFileName('optimizeImage', 'optName')">
                             <label for="optimizeImage" class="file-label">Choose Image</label>
                             <span id="optName" class="file-name"></span>
                         </div>
@@ -116,7 +121,8 @@
                             <h3>Convert Image</h3>
                         </div>
                         <div class="file-area">
-                            <input type="file" id="convertImage" accept="image/*" onchange="updateFileName('convertImage', 'convName')">
+                            <input type="file" id="convertImage" accept="image/*"
+                                onchange="updateFileName('convertImage', 'convName')">
                             <label for="convertImage" class="file-label">Choose Image</label>
                             <span id="convName" class="file-name"></span>
                         </div>
@@ -137,11 +143,12 @@
                             <h3>Watermark Image</h3>
                         </div>
                         <div class="file-area">
-                            <input type="file" id="watermarkMainImage" accept="image/*" onchange="updateFileName('watermarkMainImage', 'wmMainName')">
+                            <input type="file" id="watermarkMainImage" accept="image/*"
+                                onchange="updateFileName('watermarkMainImage', 'wmMainName')">
                             <label for="watermarkMainImage" class="file-label">Choose Base Image</label>
                             <span id="wmMainName" class="file-name"></span>
                         </div>
-                        
+
                         <div class="grid-2 mt-10">
                             <div class="form-group">
                                 <label>Watermark Type</label>
@@ -180,19 +187,38 @@
                             </div>
                         </div>
 
-                        <!-- Image Inputs -->
                         <div id="wmImageInput" class="file-area mt-10" style="display: none;">
-                            <input type="file" id="watermarkOverlayImage" accept="image/*" onchange="updateFileName('watermarkOverlayImage', 'wmOverlayName')">
                             <label for="watermarkOverlayImage" class="file-label">Choose Watermark Image</label>
                             <span id="wmOverlayName" class="file-name"></span>
                         </div>
 
+                        <!-- Resize Options (Moved outside file-area to avoid display:none) -->
+                        <div id="wmResizeOptions" style="display: none;">
+                            <div class="form-group mt-10">
+                                <label>
+                                    <input type="checkbox" id="watermarkFullScreen" onchange="toggleResizeInputs()">
+                                    Cover Full Image
+                                </label>
+                            </div>
+                            <div class="grid-2" id="wmResizeInputs">
+                                <div class="form-group">
+                                    <label>Resize Width (px)</label>
+                                    <input type="number" id="watermarkWidth" placeholder="Optional">
+                                </div>
+                                <div class="form-group">
+                                    <label>Resize Height (px)</label>
+                                    <input type="number" id="watermarkHeight" placeholder="Optional">
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group mt-10">
                             <label>Opacity (0-100)</label>
-                            <input type="range" id="watermarkOpacity" min="0" max="100" value="50" oninput="this.nextElementSibling.value = this.value">
+                            <input type="range" id="watermarkOpacity" min="0" max="100" value="50"
+                                oninput="this.nextElementSibling.value = this.value">
                             <output>50</output>
                         </div>
-                        
+
                         <button class="btn btn-primary mt-10" onclick="applyWatermark()">Apply Watermark</button>
                     </article>
 
@@ -210,11 +236,12 @@
                     <pre id="responseContent">// Ready for request...</pre>
                 </div>
                 <div id="imagePreview" class="preview-area">
-                    </div>
+                </div>
             </div>
         </aside>
     </div>
 
     <script src="js/index.js"></script>
 </body>
+
 </html>

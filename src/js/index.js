@@ -323,9 +323,11 @@ function toggleWatermarkInputs() {
     if (type === 'text') {
         textInput.style.display = 'block';
         imageInput.style.display = 'none';
+        document.getElementById('wmResizeOptions').style.display = 'none';
     } else {
         textInput.style.display = 'none';
         imageInput.style.display = 'block';
+        document.getElementById('wmResizeOptions').style.display = 'block';
     }
 }
 
@@ -350,6 +352,17 @@ async function applyWatermark() {
         const wmInput = document.getElementById('watermarkOverlayImage');
         if (!wmInput.files[0]) return alert('Select a watermark image');
         formData.append('watermarkImage', wmInput.files[0]);
+
+        // Add Resize Options for Image
+        const fullScreen = document.getElementById('watermarkFullScreen').checked;
+        formData.append('watermarkFullScreen', fullScreen);
+
+        if (!fullScreen) {
+            const width = document.getElementById('watermarkWidth').value;
+            const height = document.getElementById('watermarkHeight').value;
+            if (width) formData.append('watermarkWidth', width);
+            if (height) formData.append('watermarkHeight', height);
+        }
     }
 
     try {
@@ -362,5 +375,15 @@ async function applyWatermark() {
         displayResponse(data, response.status);
     } catch (error) {
         displayResponse({ success: false, error: error.message }, 500);
+    }
+}
+
+function toggleResizeInputs() {
+    const isFull = document.getElementById('watermarkFullScreen').checked;
+    const resizeInputs = document.getElementById('wmResizeInputs');
+    if (isFull) {
+        resizeInputs.style.display = 'none';
+    } else {
+        resizeInputs.style.display = 'grid';
     }
 }
