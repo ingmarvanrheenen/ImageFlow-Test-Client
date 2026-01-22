@@ -21,7 +21,8 @@
         </div>
         <div class="header-actions">
             <button class="btn btn-secondary" onclick="setLocalConfig()">Local</button>
-            <button class="btn btn-secondary" onclick="setProductionConfig()">Production</button>
+            <button class="btn btn-secondary" onclick="setProductionConfig()">Direct (Render)</button>
+            <button class="btn btn-secondary" onclick="setRapidApiConfig()">RapidAPI Proxy</button>
         </div>
     </header>
 
@@ -35,7 +36,7 @@
                 </div>
                 <div class="grid-2">
                     <div class="form-group">
-                        <label>Proxy Secret</label>
+                        <label id="secretLabel">Proxy Secret</label>
                         <input type="password" id="proxySecret" placeholder="Secret key...">
                     </div>
                     <div class="form-group">

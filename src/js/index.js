@@ -1,6 +1,7 @@
 // Quick config presets
 function setLocalConfig() {
     document.getElementById('apiUrl').value = 'http://localhost:3000';
+    document.getElementById('secretLabel').textContent = 'Proxy Secret';
     document.getElementById('proxySecret').value = 'test-secret';
     document.getElementById('apiUser').value = 'test-user-123';
     document.getElementById('apiSubscription').value = 'BASIC';
@@ -10,6 +11,7 @@ function setLocalConfig() {
 function setProductionConfig() {
     // Already pre-filled with Render URL
     document.getElementById('apiUrl').value = 'https://imageflow-api.onrender.com';
+    document.getElementById('secretLabel').textContent = 'Proxy Secret';
 
     const secret = prompt('Enter your RapidAPI Proxy Secret:\n\nGet it from:\n1. Render Dashboard → Your Service → Environment\n2. Or RapidAPI Dashboard → Your API → Settings', '');
     if (secret) {
@@ -20,9 +22,41 @@ function setProductionConfig() {
     }
 }
 
+function setRapidApiConfig() {
+    const host = prompt('Enter RapidAPI Host (e.g., imageflow-api.p.rapidapi.com):');
+    if (!host) return;
+
+    document.getElementById('apiUrl').value = `https://${host}`;
+
+    // Update Label for visibility
+    document.getElementById('secretLabel').textContent = 'RapidAPI Key';
+
+    const key = prompt('Enter your RapidAPI Key:', '');
+    if (key) {
+        document.getElementById('proxySecret').value = key;
+        document.getElementById('apiUser').value = 'test-user-123';
+        document.getElementById('apiSubscription').value = 'BASIC'; // Ignored by RapidAPI but good for consistency
+        alert(`✅ Configured for RapidAPI Proxy!\n\nHost: ${host}`);
+    }
+}
+
 function getHeaders() {
+    const url = document.getElementById('apiUrl').value;
+    const isRapidProxy = url.includes('rapidapi.com');
+    const secretOrKey = document.getElementById('proxySecret').value;
+
+    if (isRapidProxy) {
+        // Extract host from URL
+        const host = url.replace('https://', '').replace('http://', '').split('/')[0];
+        return {
+            'x-rapidapi-key': secretOrKey,
+            'x-rapidapi-host': host,
+            'useQueryString': 'true'
+        };
+    }
+
     return {
-        'X-RapidAPI-Proxy-Secret': document.getElementById('proxySecret').value,
+        'X-RapidAPI-Proxy-Secret': secretOrKey,
         'X-RapidAPI-User': document.getElementById('apiUser').value,
         'X-RapidAPI-Subscription': document.getElementById('apiSubscription').value
     };
